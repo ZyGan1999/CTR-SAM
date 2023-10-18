@@ -12,11 +12,14 @@ Reference:
 
 """
 
+from math import sqrt
 import os
 import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.metrics import roc_auc_score
 from time import time
+from gsam.gsam import GSAM
+from gsam.scheduler import CosineScheduler, LinearScheduler, ProportionScheduler
 
 import torch
 import torch.autograd as autograd
@@ -26,7 +29,10 @@ import torch.optim as optim
 from torch.autograd import Variable
 
 import torch.backends.cudnn
+from sam import SAM
 
+from utils.bypass_bn import enable_running_stats, disable_running_stats
+from smooth_cross_entropy import smooth_crossentropy
 
 """
     网络结构部分
@@ -187,7 +193,7 @@ class DeepFM(torch.nn.Module):
 
             print("Init deep part succeed")
 
-        print "Init succeed"
+        print("Init succeed")
 
     def forward(self, Xi, Xv):
         """
@@ -243,7 +249,7 @@ class DeepFM(torch.nn.Module):
                 deep_emb = torch.cat([(torch.sum(emb(Xi[:,i,:]),1).t()*Xv[:,i]).t() for i, emb in enumerate(self.fm_second_order_embeddings)],1)
 
             if self.deep_layers_activation == 'sigmoid':
-                activation = F.sigmoid
+                activation = torch.sigmoid
             elif self.deep_layers_activation == 'tanh':
                 activation = F.tanh
             else:
@@ -323,14 +329,25 @@ class DeepFM(torch.nn.Module):
             train model
         """
         model = self.train()
-
-        optimizer = torch.optim.SGD(self.parameters(), lr=self.learning_rate, weight_decay=self.weight_decay)
-        if self.optimizer_type == 'adam':
-            optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate, weight_decay=self.weight_decay)
+        if self.optimizer_type == 'sgd':
+            optimizer = torch.optim.SGD(self.parameters(), lr=self.learning_rate, weight_decay=self.weight_decay)
+        elif self.optimizer_type == 'adam':
+            optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate * sqrt(4096/256), weight_decay=self.weight_decay)
         elif self.optimizer_type == 'rmsp':
             optimizer = torch.optim.RMSprop(self.parameters(), lr=self.learning_rate, weight_decay=self.weight_decay)
         elif self.optimizer_type == 'adag':
             optimizer = torch.optim.Adagrad(self.parameters(), lr=self.learning_rate, weight_decay=self.weight_decay)
+        elif self.optimizer_type == 'sam':
+            optimizer = SAM(self.parameters(), torch.optim.SGD, rho=2.0, adaptive=True, lr=self.learning_rate, momentum=0.9, weight_decay=self.weight_decay)
+        elif self.optimizer_type == 'gsam':
+            #base_optimizer = torch.optim.SGD(model.parameters(), lr=self.learning_rate, momentum=0.9, weight_decay=self.weight_decay)
+            base_optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate * sqrt(4096/256), weight_decay=self.weight_decay)
+            # 458044 is the length of the training set
+            scheduler = CosineScheduler(T_max=self.n_epochs*458044, max_value=self.learning_rate * sqrt(4096/256), min_value=0.0, optimizer=base_optimizer)
+            rho_scheduler = ProportionScheduler(pytorch_lr_scheduler=scheduler, max_lr=self.learning_rate * sqrt(4096/256), min_lr=0.0,
+                            max_value=5.0, min_value=5.0)
+            optimizer = GSAM(params=self.parameters(), base_optimizer=base_optimizer, model=model, gsam_alpha=0.0, rho_scheduler=rho_scheduler, adaptive=True)
+            # alpha = 0.4 by default
 
         criterion = F.binary_cross_entropy_with_logits
 
@@ -351,13 +368,31 @@ class DeepFM(torch.nn.Module):
                 batch_y = Variable(torch.FloatTensor(y_train[offset:end]))
                 if self.use_cuda:
                     batch_xi, batch_xv, batch_y = batch_xi.cuda(), batch_xv.cuda(), batch_y.cuda()
-                optimizer.zero_grad()
-                outputs = model(batch_xi, batch_xv)
-                loss = criterion(outputs, batch_y)
-                loss.backward()
-                optimizer.step()
+                if self.optimizer_type != 'sam' and self.optimizer_type != 'gsam':
+                    optimizer.zero_grad()
+                    outputs = model(batch_xi, batch_xv)
+                    loss = criterion(outputs, batch_y)
+                    loss.backward()
+                    optimizer.step()
+                elif self.optimizer_type == 'sam':
+                    # first forward-backward step
+                    enable_running_stats(model)
+                    outputs = model(batch_xi, batch_xv)
+                    loss = criterion(outputs, batch_y)
+                    loss.backward()
+                    optimizer.first_step(zero_grad=True)
 
-                total_loss += loss.data[0]
+                    # second forward-backward step
+                    disable_running_stats(model)
+                    criterion(model(batch_xi, batch_xv), batch_y).backward()
+                    optimizer.second_step(zero_grad=True)
+                elif self.optimizer_type == 'gsam':
+                    optimizer.set_closure(criterion, [batch_xi, batch_xv], batch_y)
+                    predictions, loss = optimizer.step()
+                    scheduler.step()
+                    optimizer.update_rho_t()
+
+                total_loss += loss.item()
                 if self.verbose:
                     if i % 100 == 99:  # print every 100 mini-batches
                         eval = self.evaluate(batch_xi, batch_xv, batch_y)
@@ -369,7 +404,7 @@ class DeepFM(torch.nn.Module):
             train_loss, train_eval = self.eval_by_batch(Xi_train,Xv_train,y_train,x_size)
             train_result.append(train_eval)
             print('*'*50)
-            print('[%d] loss: %.6f metric: %.6f time: %.1f s' %
+            print('[%d] Train loss: %.6f metric: %.6f time: %.1f s' %
                   (epoch + 1, train_loss, train_eval, time()-epoch_begin_time))
             print('*'*50)
 
@@ -377,13 +412,15 @@ class DeepFM(torch.nn.Module):
                 valid_loss, valid_eval = self.eval_by_batch(Xi_valid, Xv_valid, y_valid, x_valid_size)
                 valid_result.append(valid_eval)
                 print('*' * 50)
-                print('[%d] loss: %.6f metric: %.6f time: %.1f s' %
+                print('[%d] Validation loss: %.6f metric: %.6f time: %.1f s' %
                       (epoch + 1, valid_loss, valid_eval,time()-epoch_begin_time))
+                print("current best valid metric: %.6f" % (max(valid_result)))
                 print('*' * 50)
             if save_path:
                 torch.save(self.state_dict(),save_path)
             if is_valid and ealry_stopping and self.training_termination(valid_result):
                 print("early stop at [%d] epoch!" % (epoch+1))
+                print("best valid metric: %.6f" % (max(valid_result)))
                 break
 
         # fit a few more epoch on train+valid until result reaches the best_train_score
@@ -402,6 +439,7 @@ class DeepFM(torch.nn.Module):
             self.shuffle_in_unison_scary(Xi_train,Xv_train,y_train)
             for epoch in range(64):
                 batch_iter = x_size // self.batch_size
+                epoch_begin_time = time()
                 for i in range(batch_iter + 1):
                     offset = i * self.batch_size
                     end = min(x_size, offset + self.batch_size)
@@ -412,12 +450,32 @@ class DeepFM(torch.nn.Module):
                     batch_y = Variable(torch.FloatTensor(y_train[offset:end]))
                     if self.use_cuda:
                         batch_xi, batch_xv, batch_y = batch_xi.cuda(), batch_xv.cuda(), batch_y.cuda()
-                    optimizer.zero_grad()
-                    outputs = model(batch_xi, batch_xv)
-                    loss = criterion(outputs, batch_y)
-                    loss.backward()
-                    optimizer.step()
+                    if self.optimizer_type != 'sam':
+                        optimizer.zero_grad()
+                        outputs = model(batch_xi, batch_xv)
+                        loss = criterion(outputs, batch_y)
+                        loss.backward()
+                        optimizer.step()
+                    elif self.optimizer_type == 'sam':
+                        # first forward-backward step
+                        enable_running_stats(model)
+                        outputs = model(batch_xi, batch_xv)
+                        loss = criterion(outputs, batch_y)
+                        loss.backward()
+                        optimizer.first_step(zero_grad=True)
+
+                        # second forward-backward step
+                        disable_running_stats(model)
+                        criterion(model(batch_xi, batch_xv), batch_y).backward()
+                        optimizer.second_step(zero_grad=True)
+                    elif self.optimizer_type == 'gsam':
+                        optimizer.set_closure(criterion, [batch_xi, batch_xv], batch_y)
+                        predictions, loss = optimizer.step()
+                        scheduler.step()
+                        optimizer.update_rho_t()
                 train_loss, train_eval = self.eval_by_batch(Xi_train, Xv_train, y_train, x_size)
+                print('[%d] Refit loss: %.6f metric: %.6f time: %.1f s' %
+                  (epoch + 1, train_loss, train_eval, time()-epoch_begin_time))
                 if save_path:
                     torch.save(self.state_dict(), save_path)
                 if abs(best_train_score-train_eval) < 0.001 or \
@@ -448,10 +506,10 @@ class DeepFM(torch.nn.Module):
             if self.use_cuda:
                 batch_xi, batch_xv, batch_y = batch_xi.cuda(), batch_xv.cuda(), batch_y.cuda()
             outputs = model(batch_xi, batch_xv)
-            pred = F.sigmoid(outputs).cpu()
+            pred = torch.sigmoid(outputs).cpu()
             y_pred.extend(pred.data.numpy())
             loss = criterion(outputs, batch_y)
-            total_loss += loss.data[0]*(end-offset)
+            total_loss += loss.item()*(end-offset)
         total_metric = self.eval_metric(y,y_pred)
         return total_loss/x_size, total_metric
 
@@ -491,7 +549,7 @@ class DeepFM(torch.nn.Module):
             Xi, Xv = Xi.cuda(), Xv.cuda()
 
         model = self.eval()
-        pred = F.sigmoid(model(Xi, Xv)).cpu()
+        pred = torch.sigmoid(model(Xi, Xv)).cpu()
         return (pred.data.numpy() > 0.5)
 
     def predict_proba(self, Xi, Xv):
@@ -502,7 +560,7 @@ class DeepFM(torch.nn.Module):
             Xi, Xv = Xi.cuda(), Xv.cuda()
 
         model = self.eval()
-        pred = F.sigmoid(model(Xi, Xv)).cpu()
+        pred = torch.sigmoid(model(Xi, Xv)).cpu()
         return pred.data.numpy()
 
     def inner_predict(self, Xi, Xv):
@@ -512,7 +570,7 @@ class DeepFM(torch.nn.Module):
         :return: output, numpy
         """
         model = self.eval()
-        pred = F.sigmoid(model(Xi, Xv)).cpu()
+        pred = torch.sigmoid(model(Xi, Xv)).cpu()
         return (pred.data.numpy() > 0.5)
 
     def inner_predict_proba(self, Xi, Xv):
@@ -522,7 +580,7 @@ class DeepFM(torch.nn.Module):
         :return: output, numpy
         """
         model = self.eval()
-        pred = F.sigmoid(model(Xi, Xv)).cpu()
+        pred = torch.sigmoid(model(Xi, Xv)).cpu()
         return pred.data.numpy()
 
 

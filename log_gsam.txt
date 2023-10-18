@@ -1,0 +1,421 @@
+458044
+The model is deepfm(fm+deep layers)
+Init fm part
+Init fm part succeed
+Init deep part
+Init deep part succeed
+Init succeed
+pre_process data ing...
+pre_process data finished
+[1,   100] loss: 18.694002 metric: 0.497145 time: 8.0 s
+[1,   200] loss: 11.290987 metric: 0.560963 time: 7.2 s
+[1,   300] loss: 10.117537 metric: 0.556467 time: 7.3 s
+[1,   400] loss: 9.553246 metric: 0.584719 time: 7.2 s
+[1,   500] loss: 8.706594 metric: 0.634880 time: 7.2 s
+[1,   600] loss: 8.143525 metric: 0.620098 time: 7.2 s
+[1,   700] loss: 7.658298 metric: 0.564993 time: 7.3 s
+[1,   800] loss: 7.386031 metric: 0.640134 time: 7.3 s
+[1,   900] loss: 6.762734 metric: 0.582638 time: 7.2 s
+[1,  1000] loss: 6.153646 metric: 0.584515 time: 7.2 s
+[1,  1100] loss: 5.887196 metric: 0.589681 time: 7.2 s
+[1,  1200] loss: 5.478639 metric: 0.624210 time: 7.3 s
+[1,  1300] loss: 5.019609 metric: 0.565643 time: 7.2 s
+[1,  1400] loss: 4.739331 metric: 0.553673 time: 7.2 s
+[1,  1500] loss: 4.407753 metric: 0.613338 time: 7.2 s
+[1,  1600] loss: 4.356779 metric: 0.550387 time: 7.1 s
+[1,  1700] loss: 4.098768 metric: 0.575989 time: 7.2 s
+**************************************************
+[1] Train loss: 3.945254 metric: 0.613695 time: 131.2 s
+**************************************************
+**************************************************
+[1] Validation loss: 3.984233 metric: 0.610340 time: 132.2 s
+**************************************************
+[2,   100] loss: 3.862918 metric: 0.579520 time: 7.2 s
+[2,   200] loss: 3.658159 metric: 0.618531 time: 7.3 s
+[2,   300] loss: 3.685967 metric: 0.642189 time: 7.3 s
+[2,   400] loss: 3.586013 metric: 0.594520 time: 7.3 s
+[2,   500] loss: 3.509727 metric: 0.665083 time: 7.2 s
+[2,   600] loss: 3.548065 metric: 0.672558 time: 7.2 s
+[2,   700] loss: 3.362315 metric: 0.584075 time: 7.2 s
+[2,   800] loss: 3.419967 metric: 0.645456 time: 7.2 s
+[2,   900] loss: 3.300181 metric: 0.609481 time: 7.3 s
+[2,  1000] loss: 3.226872 metric: 0.599860 time: 7.3 s
+[2,  1100] loss: 3.169235 metric: 0.604004 time: 7.2 s
+[2,  1200] loss: 3.226144 metric: 0.654663 time: 7.3 s
+[2,  1300] loss: 3.081173 metric: 0.575037 time: 7.2 s
+[2,  1400] loss: 3.006443 metric: 0.582147 time: 7.2 s
+[2,  1500] loss: 2.935996 metric: 0.618131 time: 7.3 s
+[2,  1600] loss: 2.988534 metric: 0.592413 time: 7.2 s
+[2,  1700] loss: 2.905235 metric: 0.610492 time: 7.3 s
+**************************************************
+[2] Train loss: 2.837987 metric: 0.633765 time: 130.7 s
+**************************************************
+**************************************************
+[2] Validation loss: 2.891506 metric: 0.627942 time: 131.6 s
+**************************************************
+[3,   100] loss: 2.834894 metric: 0.601104 time: 7.3 s
+[3,   200] loss: 2.709004 metric: 0.646478 time: 7.3 s
+[3,   300] loss: 2.838942 metric: 0.653772 time: 7.3 s
+[3,   400] loss: 2.792427 metric: 0.604878 time: 7.3 s
+[3,   500] loss: 2.707902 metric: 0.699006 time: 7.2 s
+[3,   600] loss: 2.789018 metric: 0.687264 time: 7.2 s
+[3,   700] loss: 2.712085 metric: 0.594165 time: 7.2 s
+[3,   800] loss: 2.680245 metric: 0.673083 time: 7.3 s
+[3,   900] loss: 2.694653 metric: 0.623075 time: 7.3 s
+[3,  1000] loss: 2.570362 metric: 0.618073 time: 7.3 s
+[3,  1100] loss: 2.638279 metric: 0.613525 time: 7.2 s
+[3,  1200] loss: 2.610109 metric: 0.660069 time: 7.2 s
+[3,  1300] loss: 2.541013 metric: 0.580519 time: 7.3 s
+[3,  1400] loss: 2.519106 metric: 0.592044 time: 7.3 s
+[3,  1500] loss: 2.469493 metric: 0.624396 time: 7.3 s
+[3,  1600] loss: 2.487051 metric: 0.614880 time: 7.3 s
+[3,  1700] loss: 2.467758 metric: 0.637263 time: 7.3 s
+**************************************************
+[3] Train loss: 2.385711 metric: 0.645923 time: 131.0 s
+**************************************************
+**************************************************
+[3] Validation loss: 2.447182 metric: 0.638682 time: 131.9 s
+**************************************************
+[4,   100] loss: 2.381396 metric: 0.600914 time: 7.4 s
+[4,   200] loss: 2.300311 metric: 0.659526 time: 7.3 s
+[4,   300] loss: 2.395144 metric: 0.667879 time: 7.3 s
+[4,   400] loss: 2.434570 metric: 0.623849 time: 7.2 s
+[4,   500] loss: 2.350878 metric: 0.697974 time: 7.2 s
+[4,   600] loss: 2.431078 metric: 0.678450 time: 7.3 s
+[4,   700] loss: 2.335178 metric: 0.614012 time: 7.4 s
+[4,   800] loss: 2.319313 metric: 0.693690 time: 7.3 s
+[4,   900] loss: 2.328727 metric: 0.623591 time: 7.3 s
+[4,  1000] loss: 2.223856 metric: 0.639037 time: 7.3 s
+[4,  1100] loss: 2.303996 metric: 0.625244 time: 7.4 s
+[4,  1200] loss: 2.289954 metric: 0.659079 time: 7.3 s
+[4,  1300] loss: 2.254693 metric: 0.585015 time: 7.2 s
+[4,  1400] loss: 2.262098 metric: 0.605596 time: 7.2 s
+[4,  1500] loss: 2.181009 metric: 0.643720 time: 7.2 s
+[4,  1600] loss: 2.226908 metric: 0.632965 time: 7.3 s
+[4,  1700] loss: 2.203785 metric: 0.650191 time: 7.3 s
+**************************************************
+[4] Train loss: 2.170435 metric: 0.656754 time: 131.2 s
+**************************************************
+**************************************************
+[4] Validation loss: 2.236448 metric: 0.648636 time: 132.1 s
+**************************************************
+[5,   100] loss: 2.159835 metric: 0.619223 time: 7.3 s
+[5,   200] loss: 2.093286 metric: 0.667548 time: 7.3 s
+[5,   300] loss: 2.160604 metric: 0.681913 time: 7.2 s
+[5,   400] loss: 2.178298 metric: 0.625557 time: 7.2 s
+[5,   500] loss: 2.148763 metric: 0.697238 time: 7.2 s
+[5,   600] loss: 2.206444 metric: 0.673878 time: 7.2 s
+[5,   700] loss: 2.143325 metric: 0.635629 time: 7.3 s
+[5,   800] loss: 2.137114 metric: 0.700030 time: 7.3 s
+[5,   900] loss: 2.138273 metric: 0.630560 time: 7.2 s
+[5,  1000] loss: 2.064844 metric: 0.644346 time: 7.3 s
+[5,  1100] loss: 2.140936 metric: 0.636434 time: 7.2 s
+[5,  1200] loss: 2.129687 metric: 0.671565 time: 7.3 s
+[5,  1300] loss: 2.109128 metric: 0.594993 time: 7.3 s
+[5,  1400] loss: 2.115407 metric: 0.612257 time: 7.3 s
+[5,  1500] loss: 2.030721 metric: 0.655759 time: 7.2 s
+[5,  1600] loss: 2.069559 metric: 0.641326 time: 7.2 s
+[5,  1700] loss: 2.058618 metric: 0.660459 time: 7.2 s
+**************************************************
+[5] Train loss: 2.054766 metric: 0.668437 time: 130.8 s
+**************************************************
+**************************************************
+[5] Validation loss: 2.124458 metric: 0.659928 time: 131.7 s
+**************************************************
+[6,   100] loss: 2.047461 metric: 0.633689 time: 7.3 s
+[6,   200] loss: 1.976361 metric: 0.670149 time: 7.2 s
+[6,   300] loss: 2.040949 metric: 0.686739 time: 7.2 s
+[6,   400] loss: 2.064237 metric: 0.646421 time: 7.2 s
+[6,   500] loss: 2.036246 metric: 0.702026 time: 7.2 s
+[6,   600] loss: 2.083363 metric: 0.675716 time: 7.2 s
+[6,   700] loss: 2.040941 metric: 0.650407 time: 7.3 s
+[6,   800] loss: 2.032817 metric: 0.700370 time: 7.2 s
+[6,   900] loss: 2.045824 metric: 0.633657 time: 7.2 s
+[6,  1000] loss: 1.974552 metric: 0.657638 time: 7.3 s
+[6,  1100] loss: 2.047262 metric: 0.648966 time: 7.2 s
+[6,  1200] loss: 2.042566 metric: 0.680167 time: 7.3 s
+[6,  1300] loss: 2.032802 metric: 0.608151 time: 7.3 s
+[6,  1400] loss: 2.029656 metric: 0.618767 time: 7.2 s
+[6,  1500] loss: 1.950305 metric: 0.663610 time: 7.2 s
+[6,  1600] loss: 1.991525 metric: 0.645267 time: 7.3 s
+[6,  1700] loss: 1.988270 metric: 0.665323 time: 7.3 s
+**************************************************
+[6] Train loss: 1.982150 metric: 0.677545 time: 130.6 s
+**************************************************
+**************************************************
+[6] Validation loss: 2.056240 metric: 0.668563 time: 131.6 s
+**************************************************
+[7,   100] loss: 1.970411 metric: 0.636924 time: 7.2 s
+[7,   200] loss: 1.904858 metric: 0.669091 time: 7.2 s
+[7,   300] loss: 1.966324 metric: 0.690229 time: 7.2 s
+[7,   400] loss: 1.989557 metric: 0.658301 time: 7.2 s
+[7,   500] loss: 1.964218 metric: 0.699448 time: 7.2 s
+[7,   600] loss: 2.007443 metric: 0.695984 time: 7.2 s
+[7,   700] loss: 1.973157 metric: 0.668675 time: 7.3 s
+[7,   800] loss: 1.952273 metric: 0.699841 time: 7.3 s
+[7,   900] loss: 1.969256 metric: 0.638734 time: 7.3 s
+[7,  1000] loss: 1.919332 metric: 0.668875 time: 7.2 s
+[7,  1100] loss: 1.976450 metric: 0.654134 time: 7.2 s
+[7,  1200] loss: 1.975018 metric: 0.689836 time: 7.3 s
+[7,  1300] loss: 1.969302 metric: 0.620395 time: 7.3 s
+[7,  1400] loss: 1.955048 metric: 0.631519 time: 7.3 s
+[7,  1500] loss: 1.887817 metric: 0.671309 time: 7.3 s
+[7,  1600] loss: 1.929417 metric: 0.653407 time: 7.3 s
+[7,  1700] loss: 1.937920 metric: 0.668191 time: 7.2 s
+**************************************************
+[7] Train loss: 1.924913 metric: 0.686008 time: 130.8 s
+**************************************************
+**************************************************
+[7] Validation loss: 2.003146 metric: 0.676437 time: 131.8 s
+**************************************************
+[8,   100] loss: 1.901700 metric: 0.647316 time: 7.3 s
+[8,   200] loss: 1.843940 metric: 0.682315 time: 7.3 s
+[8,   300] loss: 1.913994 metric: 0.697060 time: 7.3 s
+[8,   400] loss: 1.928246 metric: 0.674228 time: 7.2 s
+[8,   500] loss: 1.900023 metric: 0.699448 time: 7.3 s
+[8,   600] loss: 1.928961 metric: 0.698247 time: 7.3 s
+[8,   700] loss: 1.904211 metric: 0.677666 time: 7.2 s
+[8,   800] loss: 1.884941 metric: 0.704333 time: 7.3 s
+[8,   900] loss: 1.899130 metric: 0.637185 time: 7.3 s
+[8,  1000] loss: 1.859077 metric: 0.674688 time: 7.2 s
+[8,  1100] loss: 1.911470 metric: 0.660197 time: 7.2 s
+[8,  1200] loss: 1.917556 metric: 0.693643 time: 7.2 s
+[8,  1300] loss: 1.910567 metric: 0.620833 time: 7.3 s
+[8,  1400] loss: 1.899321 metric: 0.639170 time: 7.3 s
+[8,  1500] loss: 1.835460 metric: 0.683009 time: 7.3 s
+[8,  1600] loss: 1.877673 metric: 0.659816 time: 7.3 s
+[8,  1700] loss: 1.891564 metric: 0.664117 time: 7.3 s
+**************************************************
+[8] Train loss: 1.870489 metric: 0.691168 time: 130.9 s
+**************************************************
+**************************************************
+[8] Validation loss: 1.951701 metric: 0.681159 time: 131.8 s
+**************************************************
+[9,   100] loss: 1.845038 metric: 0.652379 time: 7.3 s
+[9,   200] loss: 1.805741 metric: 0.685665 time: 7.2 s
+[9,   300] loss: 1.879544 metric: 0.700178 time: 7.3 s
+[9,   400] loss: 1.893229 metric: 0.683435 time: 7.4 s
+[9,   500] loss: 1.858809 metric: 0.697017 time: 7.3 s
+[9,   600] loss: 1.881476 metric: 0.706542 time: 7.3 s
+[9,   700] loss: 1.868087 metric: 0.692061 time: 7.4 s
+[9,   800] loss: 1.854045 metric: 0.711881 time: 7.2 s
+[9,   900] loss: 1.858889 metric: 0.640454 time: 7.2 s
+[9,  1000] loss: 1.811245 metric: 0.675889 time: 7.3 s
+[9,  1100] loss: 1.867113 metric: 0.666667 time: 7.2 s
+[9,  1200] loss: 1.868817 metric: 0.699505 time: 7.3 s
+[9,  1300] loss: 1.865127 metric: 0.631506 time: 7.3 s
+[9,  1400] loss: 1.857139 metric: 0.649829 time: 7.3 s
+[9,  1500] loss: 1.801247 metric: 0.691614 time: 7.2 s
+[9,  1600] loss: 1.840333 metric: 0.665120 time: 7.3 s
+[9,  1700] loss: 1.852142 metric: 0.665988 time: 7.3 s
+**************************************************
+[9] Train loss: 1.829760 metric: 0.696240 time: 131.1 s
+**************************************************
+**************************************************
+[9] Validation loss: 1.914059 metric: 0.685711 time: 132.0 s
+**************************************************
+[10,   100] loss: 1.795344 metric: 0.657937 time: 7.3 s
+[10,   200] loss: 1.754177 metric: 0.692718 time: 7.3 s
+[10,   300] loss: 1.821942 metric: 0.704819 time: 7.3 s
+[10,   400] loss: 1.833677 metric: 0.689375 time: 7.4 s
+[10,   500] loss: 1.803209 metric: 0.699926 time: 7.3 s
+[10,   600] loss: 1.818638 metric: 0.704374 time: 7.3 s
+[10,   700] loss: 1.815390 metric: 0.698852 time: 7.2 s
+[10,   800] loss: 1.801645 metric: 0.713730 time: 7.3 s
+[10,   900] loss: 1.813241 metric: 0.645358 time: 7.2 s
+[10,  1000] loss: 1.768758 metric: 0.683484 time: 7.2 s
+[10,  1100] loss: 1.831365 metric: 0.672852 time: 7.3 s
+[10,  1200] loss: 1.844587 metric: 0.703159 time: 7.2 s
+[10,  1300] loss: 1.839363 metric: 0.637975 time: 7.3 s
+[10,  1400] loss: 1.822481 metric: 0.655767 time: 7.3 s
+[10,  1500] loss: 1.756305 metric: 0.701464 time: 7.3 s
+[10,  1600] loss: 1.784266 metric: 0.673517 time: 7.2 s
+[10,  1700] loss: 1.805428 metric: 0.662828 time: 7.2 s
+**************************************************
+[10] Train loss: 1.784156 metric: 0.699525 time: 130.7 s
+**************************************************
+**************************************************
+[10] Validation loss: 1.870839 metric: 0.688606 time: 131.7 s
+**************************************************
+[11,   100] loss: 1.755334 metric: 0.660069 time: 7.3 s
+[11,   200] loss: 1.726260 metric: 0.689236 time: 7.2 s
+[11,   300] loss: 1.797366 metric: 0.705524 time: 7.3 s
+[11,   400] loss: 1.823320 metric: 0.694238 time: 7.3 s
+[11,   500] loss: 1.782004 metric: 0.702799 time: 7.2 s
+[11,   600] loss: 1.783957 metric: 0.710313 time: 7.3 s
+[11,   700] loss: 1.785482 metric: 0.705930 time: 7.3 s
+[11,   800] loss: 1.766138 metric: 0.716372 time: 7.3 s
+[11,   900] loss: 1.770070 metric: 0.646649 time: 7.3 s
+[11,  1000] loss: 1.713771 metric: 0.683639 time: 7.3 s
+[11,  1100] loss: 1.761487 metric: 0.674520 time: 7.2 s
+[11,  1200] loss: 1.770927 metric: 0.699048 time: 7.2 s
+[11,  1300] loss: 1.771693 metric: 0.638523 time: 7.3 s
+[11,  1400] loss: 1.776385 metric: 0.660716 time: 7.3 s
+[11,  1500] loss: 1.727002 metric: 0.702446 time: 7.3 s
+[11,  1600] loss: 1.758994 metric: 0.682247 time: 7.2 s
+[11,  1700] loss: 1.782012 metric: 0.662870 time: 7.3 s
+**************************************************
+[11] Train loss: 1.755566 metric: 0.699375 time: 131.0 s
+**************************************************
+**************************************************
+[11] Validation loss: 1.845758 metric: 0.687911 time: 131.9 s
+**************************************************
+[12,   100] loss: 1.719474 metric: 0.656566 time: 7.3 s
+[12,   200] loss: 1.681496 metric: 0.688530 time: 7.3 s
+[12,   300] loss: 1.729734 metric: 0.707455 time: 7.2 s
+[12,   400] loss: 1.756211 metric: 0.696837 time: 7.2 s
+[12,   500] loss: 1.722916 metric: 0.706593 time: 7.2 s
+[12,   600] loss: 1.731637 metric: 0.709465 time: 7.2 s
+[12,   700] loss: 1.743766 metric: 0.704352 time: 7.3 s
+[12,   800] loss: 1.726174 metric: 0.713881 time: 7.2 s
+[12,   900] loss: 1.738627 metric: 0.650004 time: 7.3 s
+[12,  1000] loss: 1.685635 metric: 0.686895 time: 7.2 s
+[12,  1100] loss: 1.740063 metric: 0.677938 time: 7.2 s
+[12,  1200] loss: 1.767531 metric: 0.707727 time: 7.3 s
+[12,  1300] loss: 1.771906 metric: 0.648392 time: 7.2 s
+[12,  1400] loss: 1.774003 metric: 0.660183 time: 7.2 s
+[12,  1500] loss: 1.709338 metric: 0.704823 time: 7.2 s
+[12,  1600] loss: 1.712756 metric: 0.684199 time: 7.2 s
+[12,  1700] loss: 1.734552 metric: 0.659129 time: 7.3 s
+**************************************************
+[12] Train loss: 1.697214 metric: 0.701039 time: 130.7 s
+**************************************************
+**************************************************
+[12] Validation loss: 1.790236 metric: 0.688983 time: 131.7 s
+**************************************************
+[13,   100] loss: 1.666316 metric: 0.653521 time: 7.2 s
+[13,   200] loss: 1.637162 metric: 0.692762 time: 7.2 s
+[13,   300] loss: 1.684979 metric: 0.707974 time: 7.2 s
+[13,   400] loss: 1.721498 metric: 0.697988 time: 7.3 s
+[13,   500] loss: 1.687530 metric: 0.707366 time: 7.2 s
+[13,   600] loss: 1.698366 metric: 0.714272 time: 7.2 s
+[13,   700] loss: 1.705289 metric: 0.702343 time: 7.2 s
+[13,   800] loss: 1.694562 metric: 0.711541 time: 7.3 s
+[13,   900] loss: 1.712655 metric: 0.646993 time: 7.3 s
+[13,  1000] loss: 1.659655 metric: 0.683794 time: 7.2 s
+[13,  1100] loss: 1.708100 metric: 0.674032 time: 7.3 s
+[13,  1200] loss: 1.740337 metric: 0.707575 time: 7.3 s
+[13,  1300] loss: 1.731665 metric: 0.646857 time: 7.3 s
+[13,  1400] loss: 1.737364 metric: 0.656681 time: 7.3 s
+[13,  1500] loss: 1.679607 metric: 0.706144 time: 7.3 s
+[13,  1600] loss: 1.674587 metric: 0.691123 time: 7.3 s
+[13,  1700] loss: 1.707339 metric: 0.657383 time: 7.4 s
+**************************************************
+[13] Train loss: 1.675844 metric: 0.700081 time: 131.1 s
+**************************************************
+**************************************************
+[13] Validation loss: 1.773788 metric: 0.687410 time: 132.0 s
+**************************************************
+[14,   100] loss: 1.641700 metric: 0.651694 time: 7.3 s
+[14,   200] loss: 1.615966 metric: 0.693027 time: 7.3 s
+[14,   300] loss: 1.659862 metric: 0.705524 time: 7.4 s
+[14,   400] loss: 1.692173 metric: 0.694647 time: 7.3 s
+[14,   500] loss: 1.657105 metric: 0.708361 time: 7.3 s
+[14,   600] loss: 1.663416 metric: 0.711350 time: 7.3 s
+[14,   700] loss: 1.659012 metric: 0.698517 time: 7.3 s
+[14,   800] loss: 1.643190 metric: 0.711881 time: 7.2 s
+[14,   900] loss: 1.644318 metric: 0.648972 time: 7.3 s
+[14,  1000] loss: 1.583523 metric: 0.689685 time: 7.3 s
+[14,  1100] loss: 1.623897 metric: 0.676270 time: 7.3 s
+[14,  1200] loss: 1.654944 metric: 0.700723 time: 7.3 s
+[14,  1300] loss: 1.659700 metric: 0.649232 time: 7.3 s
+[14,  1400] loss: 1.675094 metric: 0.665284 time: 7.3 s
+[14,  1500] loss: 1.635426 metric: 0.707277 time: 7.3 s
+[14,  1600] loss: 1.647817 metric: 0.698195 time: 7.2 s
+[14,  1700] loss: 1.683085 metric: 0.650981 time: 7.3 s
+**************************************************
+[14] Train loss: 1.683824 metric: 0.697375 time: 131.3 s
+**************************************************
+**************************************************
+[14] Validation loss: 1.786388 metric: 0.684206 time: 132.3 s
+**************************************************
+[15,   100] loss: 1.645273 metric: 0.659840 time: 7.3 s
+[15,   200] loss: 1.626339 metric: 0.682227 time: 7.3 s
+[15,   300] loss: 1.688382 metric: 0.700104 time: 7.3 s
+[15,   400] loss: 1.740458 metric: 0.682135 time: 7.3 s
+[15,   500] loss: 1.710088 metric: 0.700331 time: 7.3 s
+[15,   600] loss: 1.714636 metric: 0.733032 time: 7.3 s
+[15,   700] loss: 1.709932 metric: 0.682353 time: 7.3 s
+[15,   800] loss: 1.702409 metric: 0.708937 time: 7.3 s
+[15,   900] loss: 1.696035 metric: 0.624968 time: 7.2 s
+[15,  1000] loss: 1.620878 metric: 0.673603 time: 7.3 s
+[15,  1100] loss: 1.648647 metric: 0.676188 time: 7.3 s
+[15,  1200] loss: 1.685019 metric: 0.707042 time: 7.2 s
+[15,  1300] loss: 1.666749 metric: 0.652705 time: 7.2 s
+[15,  1400] loss: 1.667942 metric: 0.660411 time: 7.3 s
+[15,  1500] loss: 1.625860 metric: 0.709239 time: 7.3 s
+[15,  1600] loss: 1.620786 metric: 0.699742 time: 7.2 s
+[15,  1700] loss: 1.650208 metric: 0.649318 time: 7.2 s
+**************************************************
+[15] Train loss: 1.637501 metric: 0.697246 time: 131.1 s
+**************************************************
+**************************************************
+[15] Validation loss: 1.743821 metric: 0.683617 time: 132.0 s
+**************************************************
+early stop at [15] epoch!
+refitting the model
+[1] Refit loss: 1.982089 metric: 0.664906 time: 328.0 s
+[2] Refit loss: 1.992100 metric: 0.663673 time: 328.5 s
+[3] Refit loss: 1.984351 metric: 0.663036 time: 328.1 s
+[4] Refit loss: 1.969591 metric: 0.662608 time: 327.9 s
+[5] Refit loss: 1.952112 metric: 0.662245 time: 328.1 s
+[6] Refit loss: 1.933187 metric: 0.661940 time: 327.9 s
+[7] Refit loss: 1.913361 metric: 0.661670 time: 327.9 s
+[8] Refit loss: 1.892826 metric: 0.661429 time: 328.1 s
+[9] Refit loss: 1.871816 metric: 0.661256 time: 328.1 s
+[10] Refit loss: 1.850690 metric: 0.661063 time: 327.8 s
+[11] Refit loss: 1.829663 metric: 0.660881 time: 327.7 s
+[12] Refit loss: 1.808882 metric: 0.660689 time: 328.4 s
+[13] Refit loss: 1.788144 metric: 0.660491 time: 328.5 s
+[14] Refit loss: 1.768282 metric: 0.660313 time: 328.0 s
+[15] Refit loss: 1.749656 metric: 0.660094 time: 327.6 s
+[16] Refit loss: 1.730773 metric: 0.659938 time: 327.0 s
+[17] Refit loss: 1.712775 metric: 0.659759 time: 328.3 s
+[18] Refit loss: 1.698684 metric: 0.659503 time: 328.7 s
+[19] Refit loss: 1.683903 metric: 0.659235 time: 328.0 s
+[20] Refit loss: 1.669304 metric: 0.659021 time: 328.2 s
+[21] Refit loss: 1.653830 metric: 0.658770 time: 327.8 s
+[22] Refit loss: 1.638268 metric: 0.658543 time: 327.8 s
+[23] Refit loss: 1.623230 metric: 0.658335 time: 327.9 s
+[24] Refit loss: 1.608840 metric: 0.658156 time: 327.9 s
+[25] Refit loss: 1.594905 metric: 0.657963 time: 328.2 s
+[26] Refit loss: 1.581462 metric: 0.657786 time: 328.2 s
+[27] Refit loss: 1.568474 metric: 0.657602 time: 328.0 s
+[28] Refit loss: 1.555860 metric: 0.657375 time: 327.7 s
+[29] Refit loss: 1.543731 metric: 0.657166 time: 327.4 s
+[30] Refit loss: 1.532364 metric: 0.656961 time: 327.9 s
+[31] Refit loss: 1.521818 metric: 0.656729 time: 327.9 s
+[32] Refit loss: 1.511563 metric: 0.656486 time: 327.7 s
+[33] Refit loss: 1.501945 metric: 0.656239 time: 327.1 s
+[34] Refit loss: 1.492947 metric: 0.656008 time: 327.8 s
+[35] Refit loss: 1.484136 metric: 0.655775 time: 328.9 s
+[36] Refit loss: 1.475308 metric: 0.655511 time: 328.1 s
+[37] Refit loss: 1.466695 metric: 0.655208 time: 328.3 s
+[38] Refit loss: 1.458536 metric: 0.654930 time: 327.9 s
+[39] Refit loss: 1.452767 metric: 0.654733 time: 327.8 s
+[40] Refit loss: 1.448380 metric: 0.654522 time: 328.2 s
+[41] Refit loss: 1.442621 metric: 0.654259 time: 328.2 s
+[42] Refit loss: 1.437260 metric: 0.654008 time: 328.3 s
+[43] Refit loss: 1.432203 metric: 0.653740 time: 327.6 s
+[44] Refit loss: 1.427751 metric: 0.653479 time: 328.7 s
+[45] Refit loss: 1.423614 metric: 0.653208 time: 327.7 s
+[46] Refit loss: 1.419659 metric: 0.652923 time: 327.7 s
+[47] Refit loss: 1.416553 metric: 0.652662 time: 328.3 s
+[48] Refit loss: 1.413111 metric: 0.652361 time: 328.1 s
+[49] Refit loss: 1.411901 metric: 0.652146 time: 328.6 s
+[50] Refit loss: 1.410008 metric: 0.651858 time: 328.1 s
+[51] Refit loss: 1.408957 metric: 0.651597 time: 327.8 s
+[52] Refit loss: 1.407228 metric: 0.651302 time: 328.4 s
+[53] Refit loss: 1.405728 metric: 0.650985 time: 328.0 s
+[54] Refit loss: 1.406018 metric: 0.650711 time: 327.7 s
+[55] Refit loss: 1.406329 metric: 0.650422 time: 327.7 s
+[56] Refit loss: 1.406675 metric: 0.650129 time: 327.8 s
+[57] Refit loss: 1.407544 metric: 0.649835 time: 327.5 s
+[58] Refit loss: 1.409007 metric: 0.649548 time: 327.7 s
+[59] Refit loss: 1.410270 metric: 0.649238 time: 327.6 s
+[60] Refit loss: 1.411925 metric: 0.648915 time: 327.5 s
+[61] Refit loss: 1.413335 metric: 0.648579 time: 327.7 s
+[62] Refit loss: 1.415230 metric: 0.648245 time: 328.0 s
+[63] Refit loss: 1.416666 metric: 0.647879 time: 326.9 s
+[64] Refit loss: 1.417630 metric: 0.647512 time: 328.3 s
+refit finished
