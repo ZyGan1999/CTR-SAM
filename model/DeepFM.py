@@ -18,6 +18,7 @@ import numpy as np
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.metrics import roc_auc_score
 from time import time
+from clip.clip import cow_clip
 from gsam.gsam import GSAM
 from gsam.scheduler import CosineScheduler, LinearScheduler, ProportionScheduler
 
@@ -373,6 +374,10 @@ class DeepFM(torch.nn.Module):
                     outputs = model(batch_xi, batch_xv)
                     loss = criterion(outputs, batch_y)
                     loss.backward()
+                    # clipping
+                    for param in model.parameters():
+                        if param.grad is not None:
+                            param.grad = cow_clip(param, param.grad, ratio=1.0, ids=None, cnts=None, min_w=0.03, const=False)
                     optimizer.step()
                 elif self.optimizer_type == 'sam':
                     # first forward-backward step
@@ -388,6 +393,10 @@ class DeepFM(torch.nn.Module):
                     optimizer.second_step(zero_grad=True)
                 elif self.optimizer_type == 'gsam':
                     optimizer.set_closure(criterion, [batch_xi, batch_xv], batch_y)
+                    # clipping
+                    for param in model.parameters():
+                        if param.grad is not None:
+                            param.grad = cow_clip(param, param.grad, ratio=1.0, ids=None, cnts=None, min_w=0.03, const=False)
                     predictions, loss = optimizer.step()
                     scheduler.step()
                     optimizer.update_rho_t()
