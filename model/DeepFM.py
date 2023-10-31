@@ -333,7 +333,7 @@ class DeepFM(torch.nn.Module):
         if self.optimizer_type == 'sgd':
             optimizer = torch.optim.SGD(self.parameters(), lr=self.learning_rate, weight_decay=self.weight_decay)
         elif self.optimizer_type == 'adam':
-            optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate * sqrt(4096/256), weight_decay=self.weight_decay)
+            optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate, weight_decay=self.weight_decay)
         elif self.optimizer_type == 'rmsp':
             optimizer = torch.optim.RMSprop(self.parameters(), lr=self.learning_rate, weight_decay=self.weight_decay)
         elif self.optimizer_type == 'adag':
@@ -342,11 +342,11 @@ class DeepFM(torch.nn.Module):
             optimizer = SAM(self.parameters(), torch.optim.SGD, rho=2.0, adaptive=True, lr=self.learning_rate, momentum=0.9, weight_decay=self.weight_decay)
         elif self.optimizer_type == 'gsam':
             #base_optimizer = torch.optim.SGD(model.parameters(), lr=self.learning_rate, momentum=0.9, weight_decay=self.weight_decay)
-            base_optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate * sqrt(4096/256), weight_decay=self.weight_decay)
+            base_optimizer = torch.optim.Adam(self.parameters(), lr=self.learning_rate * sqrt(32768/256), weight_decay=self.weight_decay)
             # 458044 is the length of the training set
-            scheduler = CosineScheduler(T_max=self.n_epochs*458044, max_value=self.learning_rate * sqrt(4096/256), min_value=0.0, optimizer=base_optimizer)
-            rho_scheduler = ProportionScheduler(pytorch_lr_scheduler=scheduler, max_lr=self.learning_rate * sqrt(4096/256), min_lr=0.0,
-                            max_value=5.0, min_value=5.0)
+            scheduler = CosineScheduler(T_max=self.n_epochs*458044, max_value=self.learning_rate * sqrt(32768/256), min_value=0.0, optimizer=base_optimizer)
+            rho_scheduler = ProportionScheduler(pytorch_lr_scheduler=scheduler, max_lr=self.learning_rate * sqrt(32768/256), min_lr=0.0,
+                            max_value=0.5, min_value=0.5)
             optimizer = GSAM(params=self.parameters(), base_optimizer=base_optimizer, model=model, gsam_alpha=0.0, rho_scheduler=rho_scheduler, adaptive=True)
             # alpha = 0.4 by default
 
@@ -377,7 +377,8 @@ class DeepFM(torch.nn.Module):
                     # clipping
                     for param in model.parameters():
                         if param.grad is not None:
-                            param.grad = cow_clip(param, param.grad, ratio=1.0, ids=None, cnts=None, min_w=0.03, const=False)
+                            # by default min_w = 0.03
+                            param.grad = cow_clip(param, param.grad, ratio=1.0, ids=None, cnts=None, min_w=50.0, const=False)
                     optimizer.step()
                 elif self.optimizer_type == 'sam':
                     # first forward-backward step
@@ -394,9 +395,9 @@ class DeepFM(torch.nn.Module):
                 elif self.optimizer_type == 'gsam':
                     optimizer.set_closure(criterion, [batch_xi, batch_xv], batch_y)
                     # clipping
-                    for param in model.parameters():
-                        if param.grad is not None:
-                            param.grad = cow_clip(param, param.grad, ratio=1.0, ids=None, cnts=None, min_w=0.03, const=False)
+                    #for param in model.parameters():
+                    #    if param.grad is not None:
+                    #        param.grad = cow_clip(param, param.grad, ratio=1.0, ids=None, cnts=None, min_w=0.03, const=False)
                     predictions, loss = optimizer.step()
                     scheduler.step()
                     optimizer.update_rho_t()

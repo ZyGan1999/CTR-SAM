@@ -1,3 +1,4 @@
+from clip.clip import cow_clip
 import torch
 from .util import enable_running_stats, disable_running_stats
 import contextlib
@@ -178,6 +179,13 @@ class GSAM(torch.optim.Optimizer):
             
         # synchronize gradients across workers
         self._sync_grad()    
+
+        for param_groups in self.param_groups:
+            for param in param_groups["params"]:
+                if param.grad is not None:
+                    # by default min_w = 0.03
+                    param.grad = cow_clip(param, param.grad, ratio=1.0, ids=None, cnts=None, min_w=0.2, const=False)
+  
 
         # update with new directions
         self.base_optimizer.step()

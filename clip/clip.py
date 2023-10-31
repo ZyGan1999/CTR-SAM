@@ -1,5 +1,19 @@
 import torch
 
+import torch
+
+def calculate_ratio(tensor1, tensor2):
+    # Ensure the input tensors have the same shape
+    assert tensor1.shape == tensor2.shape, "The input tensors must have the same shape"
+
+    # Calculate whether elements in tensor1 are greater than corresponding elements in tensor2
+    greater = torch.gt(tensor1, tensor2)
+
+    # Calculate the ratio of "greater" elements
+    ratio = torch.mean(greater.float())
+
+    return ratio
+
 def cow_clip(w, g, ratio=1, ids=None, cnts=None, min_w=0.03, const=False):
     if g.is_sparse:
         # FIXME: This part is not tested
@@ -23,6 +37,8 @@ def cow_clip(w, g, ratio=1, ids=None, cnts=None, min_w=0.03, const=False):
     pred = l2sum_row > 0
     l2sum_row_safe = torch.where(pred, l2sum_row, torch.ones_like(l2sum_row))
     l2norm_row = torch.sqrt(l2sum_row_safe)
+
+    #print("[CLIPPING RATIO]: ", calculate_ratio(l2norm_row, clip_t))
 
     intermediate = values * clip_t.unsqueeze(-1)
     g_clip = intermediate / torch.max(l2norm_row, clip_t).unsqueeze(-1)
